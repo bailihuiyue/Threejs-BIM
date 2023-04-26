@@ -9,11 +9,16 @@ export class City {
   camera: any;
   tweenPosition: TWEEN.Tween<any> | null;
   tweenRotation: TWEEN.Tween<any> | null;
+  height: { value: number; };
   constructor(scene, camera, controls) {
     this.scene = scene
     this.camera = camera;
     this.tweenPosition = null;
     this.tweenRotation = null;
+
+    this.height = {
+      value: 5,
+    }
 
     this.loadCity();
   }
@@ -81,7 +86,7 @@ export class City {
       // 循环加载到的模型元素
       object.traverse((child: any) => {
         if (child.isMesh) {
-          new SurroundLine(this.scene, child);
+          new SurroundLine(this.scene, child, this.height);
         }
       })
 
@@ -95,6 +100,11 @@ export class City {
     if (this.tweenPosition && this.tweenRotation) {
       this.tweenPosition.update()
       this.tweenRotation.update()
+    }
+
+    this.height.value += 0.4;
+    if (this.height.value > 160) {
+      this.height.value = 5;
     }
   }
 }

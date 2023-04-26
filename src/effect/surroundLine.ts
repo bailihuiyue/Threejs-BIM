@@ -6,8 +6,8 @@ export class SurroundLine {
     scene: any;
     child: any;
     time: any;
-    constructor(scene, child) {
-        // this.height = height;
+    constructor(scene: any, child: any, height: { value: number; }) {
+        this.height = height;
         this.scene = scene;
         this.child = child;
         // this.time = time;
@@ -36,7 +36,11 @@ export class SurroundLine {
         const material = new THREE.ShaderMaterial({
             uniforms: {
                 // 当前扫描的高度
-                // u_height: this.height,
+                u_height: this.height,
+                // 扫描线条的颜色是什么
+                u_up_color: {
+                    value: new THREE.Color(color.risingColor),
+                },
                 u_city_color: {
                     // 得需要一个模型颜色 最底部显示的颜色
                     value: new THREE.Color(color.mesh)
@@ -55,7 +59,6 @@ export class SurroundLine {
               void main() {
               
                 v_position = position;
-              
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
               }
             `,
@@ -66,9 +69,19 @@ export class SurroundLine {
               uniform vec3 u_head_color;
               uniform float u_size;
 
+              uniform vec3 u_up_color;
+              uniform float u_height;
+
               void main() {
                 vec3 base_color = u_city_color;
                 base_color = mix(base_color, u_head_color, v_position.z / u_size);
+
+                // 上升线条的高度是多少
+                if (u_height > v_position.z && u_height < v_position.z + 3.0) {
+                    float f_index = (u_height - v_position.z) / 3.0;
+                    // 让线产生模糊的效果(就像建筑物从下到上变化颜色一样)
+                    base_color = mix(u_up_color, base_color, abs(f_index - 1.0));
+                }
 
                 gl_FragColor = vec4(base_color, 1.0);
               }
