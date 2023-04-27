@@ -13,7 +13,7 @@ export class Background {
     const geometry = new THREE.SphereGeometry(5000, 32, 32)
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
-      map: loader.load('../../src/assets/white-bg.png')
+      map: loader.load('../../src/assets/black-bg.png')
     })
     const sphere = new THREE.Mesh(geometry, material)
 
