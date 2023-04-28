@@ -5,7 +5,9 @@ import * as TWEEN from '@tweenjs/tween.js'
 import { SurroundLine } from '../effect/surroundLine'
 import { Wall } from '../effect/wall'
 import { Radar } from '../effect/radar'
-import Circle  from '../effect/circle'
+import Circle from '../effect/circle'
+import { Ball } from '../effect/ball'
+
 
 export class City {
   scene: any;
@@ -98,16 +100,18 @@ export class City {
         }
       })
 
-      new Background(this.scene);
-      new Radar(this.scene, this.time);
-      new Wall(this.scene, this.time)
-      Circle(this.scene, this.time)
+      // new Background(this.scene);
+      // new Radar(this.scene, this.time);
+      // new Wall(this.scene, this.time)
+      // Circle(this.scene, this.time);
+      new Ball(this.scene, this.time)
+      
       // 添加点击选择
       this.addClick();
     })
   }
 
-  start(delta:any) {
+  start(delta: any) {
     if (this.tweenPosition && this.tweenRotation) {
       this.tweenPosition.update()
       this.tweenRotation.update()
