@@ -5,6 +5,7 @@ import * as TWEEN from '@tweenjs/tween.js'
 import { SurroundLine } from '../effect/surroundLine'
 import { Wall } from '../effect/wall'
 import { Radar } from '../effect/radar'
+import Circle  from '../effect/circle'
 
 export class City {
   scene: any;
@@ -100,6 +101,7 @@ export class City {
       new Background(this.scene);
       new Radar(this.scene, this.time);
       new Wall(this.scene, this.time)
+      Circle(this.scene, this.time)
       // 添加点击选择
       this.addClick();
     })
