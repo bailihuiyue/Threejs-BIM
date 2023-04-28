@@ -9,6 +9,7 @@ import Circle from '../effect/circle'
 import { Ball } from '../effect/ball'
 import { Cone } from '../effect/cone'
 import { Fly } from '../effect/fly'
+import { Road } from '../effect/road'
 
 export class City {
   scene: any;
@@ -107,7 +108,8 @@ export class City {
       // Circle(this.scene, this.time);
       // new Ball(this.scene, this.time);
       // new Cone(this.scene)
-      new Fly(this.scene, this.time)
+      // new Fly(this.scene, this.time)
+      new Road(this.scene, this.time)
 
       // 添加点击选择
       this.addClick();
