@@ -7,7 +7,7 @@ import { Wall } from '../effect/wall'
 import { Radar } from '../effect/radar'
 import Circle from '../effect/circle'
 import { Ball } from '../effect/ball'
-
+import { Cone } from '../effect/cone'
 
 export class City {
   scene: any;
@@ -16,7 +16,7 @@ export class City {
   tweenRotation: TWEEN.Tween<any> | null;
   height: { value: number; };
   time: { value: number; };
-  constructor(scene, camera, controls) {
+  constructor(scene: THREE.Scene, camera: THREE.PerspectiveCamera, controls: undefined) {
     this.scene = scene
     this.camera = camera;
     this.tweenPosition = null;
@@ -102,10 +102,11 @@ export class City {
 
       // new Background(this.scene);
       // new Radar(this.scene, this.time);
-      // new Wall(this.scene, this.time)
+      // new Wall(this.scene, this.time);
       // Circle(this.scene, this.time);
-      new Ball(this.scene, this.time)
-      
+      // new Ball(this.scene, this.time);
+      new Cone(this.scene, this.camera)
+
       // 添加点击选择
       this.addClick();
     })
