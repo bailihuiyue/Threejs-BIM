@@ -4,10 +4,8 @@ import * as TWEEN from '@tweenjs/tween.js'
 
 export class Cone {
   scene: any;
-  camera: any;
-  constructor(scene: any, camera: any) {
+  constructor(scene: any) {
     this.scene = scene;
-    this.camera = camera;
 
     this.createCone()
   }
