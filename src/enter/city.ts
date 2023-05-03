@@ -10,6 +10,7 @@ import { Ball } from '../effect/ball'
 import { Cone } from '../effect/cone'
 import { Fly } from '../effect/fly'
 import { Road } from '../effect/road'
+import { Font } from '../effect/font'
 
 export class City {
   scene: any;
@@ -109,7 +110,8 @@ export class City {
       // new Ball(this.scene, this.time);
       // new Cone(this.scene)
       // new Fly(this.scene, this.time)
-      new Road(this.scene, this.time)
+      // new Road(this.scene, this.time)
+      new Font(this.scene)
 
       // 添加点击选择
       this.addClick();
