@@ -12,6 +12,7 @@ import { Fly } from '../effect/fly'
 import { Road } from '../effect/road'
 import { Font } from '../effect/font'
 import Snow from '../effect/snow'
+import Rain from '../effect/rain'
 
 export class City {
   scene: any;
@@ -113,8 +114,9 @@ export class City {
       // new Fly(this.scene, this.time)
       // new Road(this.scene, this.time)
       // new Font(this.scene)
-      Snow(this.scene)
-
+      // Snow(this.scene)
+      Rain(this.scene)
+      
       // 添加点击选择
       this.addClick();
     })
