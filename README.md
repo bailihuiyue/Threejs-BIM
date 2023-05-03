@@ -1,8 +1,8 @@
 # Threejs-BIM
 学习Three制作的城市效果demo
 
+![](https://i.imgtg.com/2023/05/03/CaLtq.png)
 
- 
  效果:
  1.背景天空盒
  2.鼠标效果
@@ -153,5 +153,3 @@ const mesh = new THREE.Mesh(geometry, material)
 mesh.position.x=200; //由这里控制
 position.set(-10,10,30) //或者这样
 scene.add(mesh);
-
-23.
