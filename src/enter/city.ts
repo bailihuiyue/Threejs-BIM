@@ -13,6 +13,7 @@ import { Road } from '../effect/road'
 import { Font } from '../effect/font'
 import Snow from '../effect/snow'
 import Rain from '../effect/rain'
+import { Smoke } from '../effect/smoke'
 
 export class City {
   scene: any;
@@ -22,6 +23,7 @@ export class City {
   height: { value: number; };
   time: { value: number; };
   controls: any;
+  effect: {};
   constructor(scene: THREE.Scene, camera: THREE.PerspectiveCamera, controls: any) {
     this.scene = scene
     this.camera = camera;
@@ -36,6 +38,8 @@ export class City {
     this.time = {
       value: 0,
     }
+
+    this.effect = {}
 
     this.loadCity();
   }
@@ -152,7 +156,9 @@ export class City {
       // new Road(this.scene, this.time)
       // new Font(this.scene)
       // Snow(this.scene)
-      Rain(this.scene)
+      // Rain(this.scene)
+
+      this.effect.smoke = new Smoke(this.scene)
 
       // 添加点击选择
       this.addClick();
@@ -163,6 +169,10 @@ export class City {
   }
 
   start(delta: any) {
+    for (const key in this.effect) {
+      this.effect[key] && this.effect[key].animation();
+    }
+
     if (this.tweenPosition && this.tweenRotation) {
       this.tweenPosition.update()
       this.tweenRotation.update()
