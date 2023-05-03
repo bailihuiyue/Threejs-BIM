@@ -11,6 +11,7 @@ import { Cone } from '../effect/cone'
 import { Fly } from '../effect/fly'
 import { Road } from '../effect/road'
 import { Font } from '../effect/font'
+import Snow from '../effect/snow'
 
 export class City {
   scene: any;
@@ -111,7 +112,8 @@ export class City {
       // new Cone(this.scene)
       // new Fly(this.scene, this.time)
       // new Road(this.scene, this.time)
-      new Font(this.scene)
+      // new Font(this.scene)
+      Snow(this.scene)
 
       // 添加点击选择
       this.addClick();
