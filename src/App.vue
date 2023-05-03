@@ -26,7 +26,6 @@ onMounted(() => {
   controls.maxDistance = 2000;
   // 开启右键拖动
   controls.enablePan = true;
-  controls.enableZoom = true
 
   // 添加灯光
   // 环境光
@@ -41,7 +40,7 @@ onMounted(() => {
   renderer.setClearColor(new THREE.Color(0x000000))
   renderer.setSize(window.innerWidth, window.innerHeight)
 
-  const city = new City(scene, camera, undefined);
+  const city = new City(scene, camera, controls);
 
   const clock = new THREE.Clock();
   const start = () => {

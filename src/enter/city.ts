@@ -21,9 +21,11 @@ export class City {
   tweenRotation: TWEEN.Tween<any> | null;
   height: { value: number; };
   time: { value: number; };
-  constructor(scene: THREE.Scene, camera: THREE.PerspectiveCamera, controls: undefined) {
+  controls: any;
+  constructor(scene: THREE.Scene, camera: THREE.PerspectiveCamera, controls: any) {
     this.scene = scene
     this.camera = camera;
+    this.controls = controls;
     this.tweenPosition = null;
     this.tweenRotation = null;
 
@@ -53,6 +55,41 @@ export class City {
         this.clickEvent(event)
       }
       document.onmousemove = null;
+    }
+  }
+
+  addWheel() {
+    const body = document.body;
+    body.onmousewheel = (event: any) => {
+      const value = 30;
+      // 鼠标当前的坐标信息
+      const x = (event.clientX / window.innerWidth) * 2 - 1;
+      const y = -(event.clientY / window.innerHeight) * 2 + 1;
+      const vector = new THREE.Vector3(x, y, 0.5);
+
+      // 转换到世界坐标
+      vector.unproject(this.camera)
+      vector.sub(this.camera.position).normalize()
+
+      if (event.wheelDelta > 0) {
+
+        // 注意,相机和轨道控件位置必须一起旋转,否则不生效(原理未知)
+        this.camera.position.x += vector.x * value;
+        this.camera.position.y += vector.y * value;
+        this.camera.position.z += vector.z * value;
+
+        this.controls.target.x += vector.x * value;
+        this.controls.target.y += vector.y * value;
+        this.controls.target.z += vector.z * value;
+      } else {
+        this.camera.position.x -= vector.x * value;
+        this.camera.position.y -= vector.y * value;
+        this.camera.position.z -= vector.z * value;
+
+        this.controls.target.x -= vector.x * value;
+        this.controls.target.y -= vector.y * value;
+        this.controls.target.z -= vector.z * value;
+      }
     }
   }
 
@@ -116,9 +153,12 @@ export class City {
       // new Font(this.scene)
       // Snow(this.scene)
       Rain(this.scene)
-      
+
       // 添加点击选择
       this.addClick();
+
+      // 跟随鼠标位置进行缩放
+      this.addWheel();
     })
   }
 
